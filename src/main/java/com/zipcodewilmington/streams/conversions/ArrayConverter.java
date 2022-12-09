@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static java.util.Arrays.stream;
+
 /**
  * Created by leon on 5/25/17.
  */
@@ -25,16 +27,16 @@ public final class ArrayConverter extends PersonConversionAgent<Person[]> {
 
     //TODO
     public List<Person> toList() {
-        return null;
+        return stream(super.objectSequence).collect(Collectors.toList());
     }
 
     //TODO
     public Stream<Person> toStream() {
-        return null;
+        return stream(super.objectSequence).collect(Collectors.toList()).stream();
     }
 
     @Override
     public Person[] toArray() {
-        return super.objectSequence;
+        return (Person[]) stream(super.objectSequence).collect(Collectors.toList()).toArray();
     }
 }

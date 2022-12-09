@@ -15,7 +15,6 @@ import java.util.stream.Stream;
  */
 public class TestConversionAgent<T extends PersonConversionAgent<Person>> {
     private final T conversionAgent;
-
     private List<Person> personList;
     private Person[] personArray;
     private Stream<Person> personStream;
