@@ -36,7 +36,7 @@ public final class PersonWarehouse implements Iterable<Person> {
      * @return list of names of Person objects
      */ // TODO
     public List<String> getNames() {
-        return people.stream().map(Person::getName).collect(Collectors.toList());
+        return people.stream().map(Person::getName).toList();
     }
 
 
@@ -44,7 +44,8 @@ public final class PersonWarehouse implements Iterable<Person> {
      * @return list of uniquely named Person objects
      */ //TODO
     public Stream<Person> getUniquelyNamedPeople() {
-        return people.stream().filter(distinctByKey(e -> e.getName())).collect(Collectors.toList()).stream();
+        Set<String> name = new HashSet<>();
+        return people.stream().filter(e -> name.add(e.getName()));
     }
 
 
@@ -55,7 +56,6 @@ public final class PersonWarehouse implements Iterable<Person> {
     public Stream<Person> getUniquelyNamedPeopleStartingWith(Character character) {
         return getUniquelyNamedPeople().filter(e -> e.getName().matches("^["+ character +"]"));
     }
-
     /**
      * @param n first `n` Person objects
      * @return a Stream of respective
@@ -63,35 +63,28 @@ public final class PersonWarehouse implements Iterable<Person> {
     public Stream<Person> getFirstNUniquelyNamedPeople(int n) {
         return people.stream().filter(e -> this.contains(e)).limit(n);
     }
-
     /**
      * @return a mapping of Person Id to the respective Person name
      */ // TODO
     public Map<Long, String> getIdToNameMap() {
         return people.stream().collect(Collectors.toMap(Person::getPersonalId, Person::getName));
     }
-
-
     /**
      * @return Stream of Stream of Aliases
      */ // TODO
     public Stream<Stream<String>> getNestedAliases() {
-        return null;
+        return people.stream().map(person -> Stream.of(person.getAliases()));
     }
-
-
     /**
      * @return Stream of all Aliases
      */ // TODO
     public Stream<String> getAllAliases() {
-        return null;
+        return people.stream().map(people -> Arrays.toString(people.getAliases()));
     }
-
     // DO NOT MODIFY
     public Boolean contains(Person p) {
         return people.contains(p);
     }
-
     // DO NOT MODIFY
     public void clear() {
         people.clear();

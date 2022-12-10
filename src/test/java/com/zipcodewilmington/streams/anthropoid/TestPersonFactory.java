@@ -24,7 +24,6 @@ import java.util.stream.Stream;
 public class TestPersonFactory implements TestConstants {
     private PersonWarehouse warehouse;
     private PersonFactory factory;
-
     @Before
     public void setup() {
         this.factory = new PersonFactory();
@@ -34,35 +33,24 @@ public class TestPersonFactory implements TestConstants {
                 .createPersonList(9999)
                 .forEach(warehouse::addPerson);
     }
-
-
-
     @Test
     public final void testCreateRandomPersonList() {
         // Given
-
         // When
         List<Person> personList = factory.createPersonList(collectionSize);
-
         // Then
         Assert.assertEquals(collectionSize, personList.size());
         personList.forEach(this::ensurePersonHasNonNullFields);
     }
-
-
     @Test
     public final void testCreateRandomPersonArray() {
         // Given
-
         // When
         Person[] personArray = factory.createPersonArray(collectionSize);
-
         // Then
         Assert.assertEquals(collectionSize, personArray.length);
         Arrays.asList(personArray).forEach(this::ensurePersonHasNonNullFields);
     }
-
-
     @Test
     public final void testCreateRandomPersonStream() {
         // Given
@@ -76,8 +64,6 @@ public class TestPersonFactory implements TestConstants {
         Assert.assertEquals(collectionSize, personStream.size());
         personStream.forEach(this::ensurePersonHasNonNullFields);
     }
-
-
     private void ensurePersonHasNonNullFields(Person person) {
         String messageCheckKey = "Ensuring field is non-null";
         String messageCheckValue = "Ensuring field-value is non-null";

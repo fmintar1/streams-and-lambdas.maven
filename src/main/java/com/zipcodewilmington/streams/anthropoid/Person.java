@@ -19,7 +19,6 @@ public class Person implements Comparable<Person> {
     private Long personalId;
     private Date birthDate;
     private String[] aliases;
-
     public Person(String name, Boolean isMale, Long personalId, Date birthDate, String... aliases) {
         this.name = name;
         this.isMale = isMale;
