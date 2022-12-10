@@ -57,13 +57,13 @@ public class StreamFilter {
      * @return a list of person object whose name starts with `this.startingCharacter`
      */ //TODO
     public List<Person> toListMultiLine() {
-        StreamFilter filter = new StreamFilter();
         return personStream.filter(
                 p -> {
-                    String name = String.valueOf(p.getName().charAt(0));
-                    return name.equals(this.startingCharacter);
-                }).collect(Collectors.toList());
+                    return p.getName().equals(this.startingCharacter);
+                }).toList();
     }
+    //personStream is a stream of Person
+    //
 
 
     /**
@@ -71,7 +71,7 @@ public class StreamFilter {
      * @return a list of person objects whose name starts with `this.startingCharacter`
      */ //TODO
     public List<Person> toListOneLine() {
-        return personStream.filter(p -> String.valueOf(p.getName().startsWith(startingCharacter)).equals(startingCharacter)).toList();
+        return personStream.filter(p -> p.getName().equals(startingCharacter)).toList();
 //        return toListMultiLine();
     }
 
@@ -81,7 +81,7 @@ public class StreamFilter {
      * @return an array of person object whose name starts with `this.startingCharacter`
      */ //TODO
     public Person[] toArrayOneLine() {
-        return personStream.filter(p -> String.valueOf(p.getName().startsWith(startingCharacter)).equals(startingCharacter)).toArray(Person[]::new);
+        return personStream.filter(p -> p.getName().equals(startingCharacter)).toArray(Person[]::new);
     }
 
 
@@ -92,8 +92,7 @@ public class StreamFilter {
     public Person[] toArrayMultiLine() {
         return personStream.filter(
                 p -> {
-                    String name = String.valueOf(p.getName().charAt(0));
-                    return name.equals(startingCharacter);
+                    return p.getName().equals(startingCharacter);
                 }
         ).toArray(Person[]::new);
     }
